@@ -1,0 +1,24 @@
+apiVersion: admin.enmasse.io/v1beta2
+kind: AddressSpacePlan
+metadata:
+  name: unlimited-standard
+  labels:
+    app: enmasse
+spec:
+  displayName: Unlimited
+  displayOrder: 0
+  infraConfigRef: default
+  shortDescription: Unlimited plan without resource restrictions.
+  longDescription: Unlimited plan where you can create an large number of addresses until the system (probably) falls over.
+  addressSpaceType: standard
+  resourceLimits:
+    router: 10000.0
+    broker: 10000.0
+    aggregate: 10000.0
+  addressPlans:
+  - standard-anycast
+  - standard-multicast
+  - sharded-queue
+  - pooled-queue
+  - sharded-topic
+  - pooled-topic

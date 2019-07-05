@@ -1,0 +1,19 @@
+apiVersion: admin.enmasse.io/v1beta2
+kind: AddressSpacePlan
+metadata:
+  name: unlimited-brokered
+  labels:
+    app: enmasse
+spec:
+  displayName: Unlimited
+  displayOrder: 0
+  infraConfigRef: default
+  shortDescription: Unlimited plan without resource restrictions.
+  longDescription: Unlimited plan where you can create an infinite number of queues until the system falls over.
+  addressSpaceType: brokered
+  resourceLimits:
+    broker: 1.9
+    router: 0.0
+  addressPlans:
+  - brokered-queue
+  - brokered-topic

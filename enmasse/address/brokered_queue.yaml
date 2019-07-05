@@ -1,0 +1,8 @@
+apiVersion: enmasse.io/v1alpha1
+kind: Address
+metadata:
+  name: brokered.queue1
+spec:
+  address: queue.1
+  type: queue
+  plan: brokered-queue

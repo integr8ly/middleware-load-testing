@@ -1,0 +1,15 @@
+apiVersion: enmasse.io/v1alpha1
+kind: AddressList
+items:
+  - metadata:
+      name: brokered.queue
+    spec:
+      address: queue
+      type: queue
+      plan: brokered-queue
+  - metadata:
+      name: brokered.topic
+    spec:
+      address: topic
+      type: topic
+      plan: brokered-topic

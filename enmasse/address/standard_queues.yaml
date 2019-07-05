@@ -1,0 +1,21 @@
+apiVersion: enmasse.io/v1alpha1
+kind: AddressList
+items:
+  - metadata:
+      name: standard.queue1
+    spec:
+      address: queue.1
+      type: queue
+      plan: pooled-queue
+  - metadata:
+      name: standard.queue2
+    spec:
+      address: queue.2
+      type: queue
+      plan: pooled-queue
+  - metadata:
+      name: standard.queue3
+    spec:
+      address: queue.3
+      type: queue
+      plan: pooled-queue

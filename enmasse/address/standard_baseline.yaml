@@ -1,0 +1,27 @@
+apiVersion: enmasse.io/v1alpha1
+kind: AddressList
+items:
+  - metadata:
+      name: standard.queue
+    spec:
+      address: queue
+      type: queue
+      plan: pooled-queue
+  - metadata:
+      name: standard.topic
+    spec:
+      address: topic
+      type: topic
+      plan: pooled-topic
+  - metadata:
+      name: standard.anycast
+    spec:
+      address: anycast
+      type: anycast
+      plan: standard-anycast
+  - metadata:
+      name: standard.multicast
+    spec:
+      address: multicast
+      type: multicast
+      plan: standard-multicast
