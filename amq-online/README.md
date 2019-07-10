@@ -13,9 +13,10 @@ This guide covers setting up/tearing down tests, changing storage settings etc.
 ### Creating addresses
 To meet the description use cases outlined above a number of addresses need to be created.
 
-First, we need to create a none authentication service.
+First, we need remove the standard authservice and to create a none authentication service.
 ```
 oc project openshift-enmasse
+oc delete authenticationservice standard-authservice
 oc create -f enmasse/authservice/none-authservice.yaml
 ```
 Now we will create our address spaces and addresses in a different project
