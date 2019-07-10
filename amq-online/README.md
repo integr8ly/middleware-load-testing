@@ -1,4 +1,4 @@
-# EnMasse Integreatly Perf Setup
+# AMQ Online Perf Setup
 
    * [Description of test plans](https://docs.google.com/document/d/1d8HXkpuxtHu1vFoUPmx0BW8AyVIAcvmyFXlKzVK9woI/edit?usp=drive_web&ouid=114847416645920015745) taken from original work carried out by the EnMasse team and adapted to Integreatly` needs
 
@@ -13,7 +13,7 @@ This guide covers setting up/tearing down tests, changing storage settings etc.
 ### Creating addresses
 To meet the description use cases outlined above a number of addresses need to be created.
 
-First We need to create a none authentication service.
+First, we need to create a none authentication service.
 ```
 oc project openshift-enmasse
 oc create -f enmasse/authservice/none-authservice.yaml
