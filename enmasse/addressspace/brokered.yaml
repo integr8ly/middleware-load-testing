@@ -4,6 +4,6 @@ metadata:
   name: brokered
 spec:
   type: brokered
-  plan: unlimited-brokered
+  plan: brokered-single-broker
   autenticationService:
     type: none

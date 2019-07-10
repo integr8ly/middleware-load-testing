@@ -11,22 +11,18 @@ This guide covers setting up/tearing down tests, changing storage settings etc.
 - Integreatly POC Cluster 
 
 ### Creating addresses
-To meet the description use cases outlined above a number of new address need to be created.
+To meet the description use cases outlined above a number of addresses need to be created.
+
+First We need to delete the standard authentication service and replace it with a none authentication service
 ```
 oc project openshift-enmasse
-oc create -f enmasse/plans
-# Wait until address space plans, `standard`, `standard-mqtt` and `brokered` are created
-```
-We need to delete the standard authentication service and replace it with a none authentication service
-```
-oc delete authenticationservice standard-authservice
 oc create -f enmasse/authservice/none-authservice.yaml
 ```
 Now we will create our address spaces and addresses in a different project
 ```
 oc new-project maestro-test-addresses
-oc create -f enmassee/addressspace/standard.yaml
-oc create -f enmassee/addressspace/brokered.yaml
+oc create -f enmasse/addressspace/standard.yaml
+oc create -f enmasse/addressspace/brokered.yaml
 
 # Wait until the address spaces `standard` and `brokered` status equals true
 oc get addressspace standard -o jsonpath={.status.isReady}
@@ -42,36 +38,6 @@ oc get addressspace standard -o 'jsonpath={.status.endpointStatuses[?(@.name=="m
 # brokered
 oc get addressspace brokered -o 'jsonpath={.status.endpointStatuses[?(@.name=="messaging")].externalHost}'
 ```
-
-### Changing storage provisioner
-
-Edit `enmasse/plans/brokered-plans.yaml`, replace the value "glusterfs-storage" with "local-hdd" or vice versa to change the storage class used by brokers.
-
-Delete and deploy EnMasse after changing.
-
-### Changing broker memory settings
-
-Edit `enmasse/plans/brokered-plans.yaml`, locate instances of "BROKER_MEMORY_LIMIT" and replace with desired values. This will adjust the total memory available to the broker _container_. The heap of the broker will be half of the container memory.
-
-You can also tune "GLOBAL_MAX_SIZE" in the same way. It is set to -1 (half of broker heap) by default to tune max
-memory used by queues.
-
-Delete and deploy EnMasse after changing.
-
-### Changing plans
-
-Edit `enmasse/plans/standard-plans.yaml` and/or `enmasse/plans/brokered-plans.yaml`. Either change the router and broker credits to increase the routers and brokers deployed by default, or add additional plans to avoid having to redeploy EnMasse every time.
-
-How to add plans are covered in http://enmasse.io/documentation/master/#configuring_address_space_and_address_plans
-
-Delete and deploy EnMasse after changing.
-
-### Changing plans on the fly
-
-To change plans on the fly, i.e. to cause more pods to be created, you can edit the plan configmaps
-in the address space namespace directly. I.e, oc edit -n maestro-standard
-address-plan-pooled-queue -o yaml and then change the credits
-
 
 ## Deploying test infrastructure
 
@@ -122,10 +88,10 @@ Then we create the services, the deployment and expose the services:
 
 ```
 oc apply -f maestro/oc/reports/reports-service.yaml -f maestro/oc/reports/reports-deployment.yaml
-oc expose -f maestro/oc/reports/reports-service.yaml --hostname=my.hostname.com
+oc expose -f maestro/oc/reports/reports-service.yaml --hostname=reports.apps.<<my.hostname.com>>
 ```
 
-**Note**: be sure to replace `my.hostname.com` with the correct hostname for the reports server.
+**Note**: be sure to replace `<<my.hostname.com>>` with the correct hostname for the reports server.
 
 ### Deploy worker
 The worker connects to the maestro broker through the broker service.
@@ -172,8 +138,5 @@ To run a test first you must update `testcase-1.yaml` to match your Receive Url
 oc apply -f maestro/oc/client/testcase-1.yaml
 oc apply -f maestro/oc/client/client.yaml
 ```
-The test is finished once the job is marked as complete. If the test fails it will be rerun. You can wait for the job to complete with a command like this:
-```
-until oc get pod maestro-client -o jsonpath='{.status.containerStatuses[?(@.name=="client")].state.terminated.reason}' | grep Completed ; do sleep 1; done
-```
+The test is finished once the job is marked as complete. If the test fails it will be rerun. You can view the progress in the client pod's logs. 
 You can now start a new test case by replacing the client-config configmap with a new test case, and recreating the pod.
