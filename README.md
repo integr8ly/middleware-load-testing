@@ -13,7 +13,7 @@ This guide covers setting up/tearing down tests, changing storage settings etc.
 ### Creating addresses
 To meet the description use cases outlined above a number of addresses need to be created.
 
-First We need to delete the standard authentication service and replace it with a none authentication service
+First We need to create a none authentication service.
 ```
 oc project openshift-enmasse
 oc create -f enmasse/authservice/none-authservice.yaml
@@ -108,17 +108,15 @@ Scale the workers up to the amount of replicas that you need for your test:
 oc scale deployment --replicas=2 maestro-worker
 ```
 
-### Deploy inspector
+### Deploy inspector (optional)
+**Note** Both the inspector and the agent are optional as they are currently experimental components and may cause some unwanted affects.
 
 To deploy the inspector:
 
 ```
 oc apply -f maestro/oc/inspector/inspector-deployment.yaml
 ``` 
-
-**Note**: the inspector is as an experimental component which may affect the stability of the SUT.
-
-### Deploy agent
+### Deploy agent (optional)
 
 To deploy the agent:
 
