@@ -4,18 +4,18 @@ items:
   - metadata:
       name: standard.queue1
     spec:
-      address: queue.1
+      address: queue.small
       type: queue
-      plan: pooled-queue
+      plan: standard-small-queue
   - metadata:
       name: standard.queue2
     spec:
-      address: queue.2
+      address: queue.medium
       type: queue
-      plan: pooled-queue
+      plan: standard-medium-queue 
   - metadata:
       name: standard.queue3
     spec:
-      address: queue.3
+      address: queue.large
       type: queue
-      plan: pooled-queue
+      plan: standard-large-queue 

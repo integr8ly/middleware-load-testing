@@ -6,22 +6,22 @@ items:
     spec:
       address: queue
       type: queue
-      plan: pooled-queue
+      plan: standard-small-queue
   - metadata:
       name: standard.topic
     spec:
       address: topic
       type: topic
-      plan: pooled-topic
+      plan: standard-small-topic 
   - metadata:
       name: standard.anycast
     spec:
       address: anycast
       type: anycast
-      plan: standard-anycast
+      plan: standard-small-anycast 
   - metadata:
       name: standard.multicast
     spec:
       address: multicast
       type: multicast
-      plan: standard-multicast
+      plan: standard-small-multicast
