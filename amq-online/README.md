@@ -29,8 +29,8 @@ oc create -f enmasse/addressspace/brokered.yaml
 oc get addressspace standard -o jsonpath={.status.isReady}
 oc get addressspace brokered -o jsonpath={.status.isReady}
 
-oc create -f enmasse/address/standard_baseline.yaml 
-oc create -f enmasse/address/brokered_baseline.yaml
+oc create -f enmasse/address/integreatly_standard.yaml 
+oc create -f enmasse/address/integreatly_brokered.yaml 
 ```
 **Note** to retrieve the address space messaging endpoints for the `standard` and `brokered` host names
 ```

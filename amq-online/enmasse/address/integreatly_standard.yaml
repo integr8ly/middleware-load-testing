@@ -1,0 +1,76 @@
+apiVersion: enmasse.io/v1alpha1
+kind: AddressList
+items:
+  - metadata:
+      name: standard.small.queue
+    spec:
+      address: small-queue
+      type: queue
+      plan: standard-small-queue
+  - metadata:
+      name: standard.medium.queue
+    spec:
+      address: medium-queue
+      type: queue
+      plan: standard-medium-queue
+  - metadata:
+      name: standard.large.queue
+    spec:
+      address: large-queue
+      type: queue
+      plan: standard-large-queue
+  - metadata:
+      name: standard.small.topic
+    spec:
+      address: small-topic
+      type: topic
+      plan: standard-small-topic
+  - metadata:
+      name: standard.medium.topic
+    spec:
+      address: medium-topic
+      type: topic
+      plan: standard-medium-topic
+  - metadata:
+      name: standard.large.topic
+    spec:
+      address: large-topic
+      type: topic
+      plan: standard-large-topic
+  - metadata:
+      name: standard.small.anycast
+    spec:
+      address: small-anycast
+      type: anycast
+      plan: standard-small-anycast
+  - metadata:
+      name: standard.medium.anycast
+    spec:
+      address: medium-anycast
+      type: anycast
+      plan: standard-medium-anycast
+  - metadata:
+      name: standard.large.anycast
+    spec:
+      address: large-anycast
+      type: anycast
+      plan: standard-large-anycast 
+  - metadata:
+      name: standard.small.multicast
+    spec:
+      address: small-multicast
+      type: multicast
+      plan: standard-small-multicast
+  - metadata:
+      name: standard.medium.multicast
+    spec:
+      address: medium-multicast
+      type: multicast
+      plan: standard-medium-multicast
+  - metadata:
+      name: standard.large.multicast
+    spec:
+      address: large-multicast
+      type: multicast
+      plan: standard-large-multicast
+
