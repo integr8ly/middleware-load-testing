@@ -25,3 +25,9 @@
 
   - include_role:
       name: maestro-worker
+
+  - include_role:
+      name: maestro-inspector
+
+  - include_role:
+      name: maestro-agent

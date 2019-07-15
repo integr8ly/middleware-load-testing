@@ -5,6 +5,7 @@ test_rate: 0
 test_duration: 0d0h5m0s
 test_opts: transport.trustAll=true&transport.verifyHost=false
 test_amqps_url: "amqps://messaging-{{test_host}}.openshift-enmasse.svc:5671/small-queue?{{test_opts}}"
+test_worker_nodes: 2
 
 singlepoint_fair_incremental_test: /test-scripts/FairIncrementalTest.groovy
 singlepoint_fixed_rate_test: /test-scripts/FixedRateTest.groovy

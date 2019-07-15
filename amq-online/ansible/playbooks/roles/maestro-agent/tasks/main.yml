@@ -1,0 +1,8 @@
+---
+- name: Process maestro agent deployment template
+  template: 
+    src: agent-deployment.yaml.j2
+    dest: "{{temp_dir}}/agent-deployment.yaml"
+
+- name: Create maestro agent
+  shell: oc apply -f {{temp_dir}}/agent-deployment.yaml

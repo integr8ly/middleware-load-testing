@@ -17,7 +17,7 @@
     src: reports-service.yaml.j2
     dest: "{{temp_dir}}/reports-service.yaml"
 
-- name: Create reports service and deployment
+- name: Create maestro reports service and deployment
   shell: oc apply -f {{temp_dir}}/reports-service.yaml -f {{temp_dir}}/reports-deployment.yaml
 
 - name: Expose maestro reports server

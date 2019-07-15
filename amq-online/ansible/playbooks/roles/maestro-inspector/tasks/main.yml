@@ -1,0 +1,8 @@
+---
+- name: Process maestro inspector deployment template
+  template: 
+    src: inspector-deployment.yaml.j2
+    dest: "{{temp_dir}}/inspector-deployment.yaml"
+
+- name: Create maestro inspector
+  shell: oc apply -f {{temp_dir}}/inspector-deployment.yaml
