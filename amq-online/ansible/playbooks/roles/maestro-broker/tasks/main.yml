@@ -1,0 +1,18 @@
+---
+- name: Process cluster service template
+  template:
+    src: cluster-service.yaml.j2
+    dest: "{{ temp_dir }}/cluster-service.yaml"
+
+- name: Process external service template
+  template:
+    src: external-service.yaml.j2
+    dest: "{{ temp_dir }}/external-service.yaml"
+
+- name: Process mosquitto deployment template
+  template:
+    src: mosquitto-deployment.yaml.j2
+    dest: "{{ temp_dir }}/mosquitto-deployment.yaml"
+
+- name: Create maestro broker
+  shell: "oc apply -f {{ temp_dir }}/mosquitto-deployment.yaml -f {{ temp_dir }}/cluster-service.yaml -f {{ temp_dir }}/external-service.yaml"

@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Check namespace doesn't already exist
+    shell: oc get namespace maestro
+    register: namespace_exists
+    failed_when: namespace_exists.stderr != '' and 'NotFound' not in namespace_exists.stderr
+
+  - name: Creating project maestro
+    shell: oc new-project maestro
+    when: namespace_exists.rc != 0
+
+  - include_role:
+      name: maestro-broker
