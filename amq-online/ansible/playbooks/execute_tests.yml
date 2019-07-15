@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Create maestro project
+    shell: oc new-project maestro
+  - import_role:
+      name: testcase
+  - include_role:
+      name: testcase
