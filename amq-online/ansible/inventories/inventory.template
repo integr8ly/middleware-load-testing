@@ -1,0 +1,8 @@
+[all:vars]
+temp_dir=/tmp
+
+[master:vars]
+ansible_user=root
+
+[master]
+master.evals.example.com

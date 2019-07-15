@@ -1,4 +1,10 @@
 ---
+- hosts: master
+  gather_facts: no
+  tasks:
+  - include_role:
+      name: config
+
 - hosts: localhost
   gather_facts: no
   tasks:
@@ -13,3 +19,6 @@
 
   - include_role:
       name: maestro-broker
+
+  - include_role:
+      name: maestro-reports

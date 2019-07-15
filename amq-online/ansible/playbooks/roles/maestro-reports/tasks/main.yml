@@ -1,0 +1,24 @@
+---
+- name: Process reports data pvc template
+  template: 
+    src: reports-data-pvc.yaml.j2
+    dest: "{{temp_dir}}/reports-data-pvc.yaml"
+
+- name: Create reports PVC
+  shell: oc apply -f {{temp_dir}}/reports-data-pvc.yaml
+
+- name: Process reports deployment template
+  template:
+    src: reports-deployment.yaml.j2
+    dest: "{{temp_dir}}/reports-deployment.yaml"
+
+- name: Process reports service template
+  template:
+    src: reports-service.yaml.j2
+    dest: "{{temp_dir}}/reports-service.yaml"
+
+- name: Create reports service and deployment
+  shell: oc apply -f {{temp_dir}}/reports-service.yaml -f {{temp_dir}}/reports-deployment.yaml
+
+- name: Expose maestro reports server
+  shell: oc expose -f {{temp_dir}}/reports-service.yaml --hostname=reports.{{ hostvars['MASTER_CONFIG']['routing_subdomain'] }}

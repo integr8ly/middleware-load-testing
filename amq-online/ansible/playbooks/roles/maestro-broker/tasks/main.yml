@@ -15,4 +15,4 @@
     dest: "{{ temp_dir }}/mosquitto-deployment.yaml"
 
 - name: Create maestro broker
-  shell: "oc apply -f {{ temp_dir }}/mosquitto-deployment.yaml -f {{ temp_dir }}/cluster-service.yaml -f {{ temp_dir }}/external-service.yaml"
+  shell: oc apply -f {{ temp_dir }}/mosquitto-deployment.yaml -f {{ temp_dir }}/cluster-service.yaml -f {{ temp_dir }}/external-service.yaml
