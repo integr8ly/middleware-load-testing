@@ -22,3 +22,6 @@
 
   - include_role:
       name: maestro-reports
+
+  - include_role:
+      name: maestro-worker

@@ -1,0 +1,8 @@
+---
+- name: Process worker deployment template
+  template: 
+    src: worker-deployment.yaml.j2
+    dest: "{{temp_dir}}/worker-deployment.yaml"
+
+- name: Create maestro worker
+  shell: oc apply -f {{temp_dir}}/worker-deployment.yaml
