@@ -1,0 +1,53 @@
+---
+- name: Check address space namespace doesn't already exist
+  shell: oc get namespace {{test_ns}}
+  register: namespace_exists
+  failed_when: namespace_exists.stderr != '' and 'NotFound' not in namespace_exists.stderr
+
+- name: Creating project maestro
+  shell: oc new-project {{test_ns}}
+  when: namespace_exists.rc != 0 
+
+- name: Process standard address space
+  template:
+    src: standard.yaml.j2
+    dest: "{{temp_dir}}/standard.yaml"
+
+- name: Check standard address space doesn't already exist
+  shell: oc get addressspace standard -n {{test_ns}}
+  register: standard_addressspace_exists
+  failed_when: standard_addressspace_exists.stderr != '' and 'NotFound' not in standard_addressspace_exists.stderr
+
+- name: Create standard address space 
+  shell: oc create -f {{temp_dir}}/standard.yaml -n {{test_ns}}
+  when: standard_addressspace_exists.rc != 0
+
+- name: Process brokered address space
+  template:
+    src: brokered.yaml.j2
+    dest: "{{temp_dir}}/brokered.yaml"
+
+- name: Check brokered address space doesn't already exist
+  shell: oc get addressspace brokered -n {{test_ns}}
+  register: brokered_addressspace_exists
+  failed_when: brokered_addressspace_exists.stderr != '' and 'NotFound' not in brokered_addressspace_exists.stderr
+
+- name: Create brokered address space
+  shell: oc create -f {{temp_dir}}/brokered.yaml -n {{test_ns}}
+  when: brokered_addressspace_exists.rc != 0
+
+- name: Check if standard address space has created successfully
+  shell: oc get addressspace standard -o jsonpath={.status.isReady}
+  register: task_result
+  until: '"true" in task_result.stdout_lines' 
+  retries: 25
+  delay: 5
+  failed_when: task_result.rc != 0
+  
+- name: Check if brokered address space has created successfully
+  shell: oc get addressspace brokered -o jsonpath={.status.isReady}
+  register: task_result_brokered
+  until: '"true" in task_result_brokered.stdout_lines' 
+  retries: 25
+  delay: 5
+  failed_when: task_result_brokered.rc != 0

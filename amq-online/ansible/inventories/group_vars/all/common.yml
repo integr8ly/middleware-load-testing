@@ -14,3 +14,4 @@ singlepoint_flexible_test: /test-scripts/FlexibleTest.groovy
 singlepoint_incremantal_test: /test-scripts/IncrementalTest.groovy
 
 enmasse_infra_ns: openshift-enmasse   
+test_ns: maestro-test-addresses

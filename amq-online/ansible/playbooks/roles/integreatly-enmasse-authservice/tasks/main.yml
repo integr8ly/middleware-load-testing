@@ -9,9 +9,6 @@
   register: authservice_exists
   failed_when: authservice_exists.stderr != '' and 'NotFound' not in authservice_exists.stderr
 
-- debug:
-    msg: "{{authservice_exists.rc}}"
-
 - name: Delete standard authservice
   shell: oc delete authenticationservice standard-authservice -n {{ enmasse_infra_ns }}
   when: authservice_exists.rc == 0
