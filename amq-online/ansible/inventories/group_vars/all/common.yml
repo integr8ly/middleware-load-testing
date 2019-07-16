@@ -12,3 +12,5 @@ singlepoint_fixed_rate_test: /test-scripts/FixedRateTest.groovy
 singlepoint_fixed_rate_agent_test: /test-scripts/FixedRateTestWithAgent.groovy
 singlepoint_flexible_test: /test-scripts/FlexibleTest.groovy
 singlepoint_incremantal_test: /test-scripts/IncrementalTest.groovy
+
+enmasse_infra_ns: openshift-enmasse   

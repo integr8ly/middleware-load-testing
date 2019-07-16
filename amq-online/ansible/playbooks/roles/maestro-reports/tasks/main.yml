@@ -20,5 +20,11 @@
 - name: Create maestro reports service and deployment
   shell: oc apply -f {{temp_dir}}/reports-service.yaml -f {{temp_dir}}/reports-deployment.yaml
 
+- name: Check exposed report route
+  shell: oc get routes reports-external
+  register: reports_route_exists
+  failed_when: reports_route_exists.stderr  != '' and 'NotFound' not in reports_route_exists.stderr
+
 - name: Expose maestro reports server
   shell: oc expose -f {{temp_dir}}/reports-service.yaml --hostname=reports.{{ hostvars['MASTER_CONFIG']['routing_subdomain'] }}
+  when: reports_route_exists.rc != 0

@@ -1,10 +1,10 @@
 ---
-- name: Process cluster service template
+- name: Process maestro cluster service template
   template:
     src: cluster-service.yaml.j2
     dest: "{{ temp_dir }}/cluster-service.yaml"
 
-- name: Process external service template
+- name: Process maestro external service template
   template:
     src: external-service.yaml.j2
     dest: "{{ temp_dir }}/external-service.yaml"
