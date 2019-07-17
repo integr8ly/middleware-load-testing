@@ -8,6 +8,9 @@
 - hosts: localhost
   gather_facts: no
   tasks:
+  - import_role:
+      name: label-nodes
+
   - name: Check namespace doesn't already exist
     shell: oc get namespace maestro
     register: namespace_exists

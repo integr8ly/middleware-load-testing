@@ -1,0 +1,43 @@
+---
+- name: Retrieve cluster nodes
+  shell: oc get nodes -o json
+  register: cluster_nodes
+  changed_when: False
+
+- name: Parse nodes from JSON
+  set_fact:
+    nodes: "{{cluster_nodes.stdout | from_json }}"
+
+- name: Get infra nodes
+  set_fact:
+    infra_nodes: "{{nodes | json_query('items[?metadata.labels.type == `infra`]') }}"
+
+- name: Get compute nodes
+  set_fact:
+    compute_nodes: "{{nodes | json_query('items[?metadata.labels.type == `compute`]') }}"
+
+- name: Get compute node address
+  set_fact:
+    compute_node_addresses: "{{ compute_nodes | json_query('[?status.addresses[?type == `Hostname`]].{addresses: status.addresses[*]}') }}"
+
+- name: Get infra node addresses
+  set_fact:
+    infra_node_addresses: "{{ infra_nodes | json_query('[?status.addresses[?type == `Hostname`]].{addresses: status.addresses[*]}') }}"
+
+- name: Return compute node addresses
+  set_fact:
+    compute_dns: "{{ compute_node_addresses | json_query('[*].addresses[?(@.type==`Hostname`)].address') }}"
+
+- name: Return infra node addresses
+  set_fact:
+    infra_dns: "{{ infra_node_addresses | json_query('[*].addresses[?(@.type==`Hostname`)].address') }}"
+
+- name: Label infra nodes
+  shell: oc label node {{ item }} maestro-node-role=infra --overwrite
+  with_items: "{{ infra_dns }}"
+
+- name: Label infra nodes
+  shell: oc label node {{ item }} maestro-node-role=worker --overwrite
+  with_items: "{{ compute_dns }}"
+
+
