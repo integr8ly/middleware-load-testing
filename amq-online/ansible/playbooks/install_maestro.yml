@@ -34,3 +34,6 @@
 
   - include_role:
       name: maestro-agent
+
+  - include_role:
+      name: maestro-config

@@ -1,0 +1,60 @@
+---
+- name: Create a temp test directory if it does not exist
+  file:
+    path: "{{temp_test_dir}}"
+    state: directory
+    mode: '0755'
+    
+- name: Process single point fair incremental test
+  template:
+    src: SinglePointFairIncrementalTest.groovy.j2
+    dest: "{{temp_test_dir}}/SinglePointFairIncrementalTest.groovy"
+
+- name: Process single point fixed rate test
+  template:
+    src: SinglePointFixedRateTest.groovy.j2 
+    dest: "{{temp_test_dir}}/SinglePointFixedRateTest.groovy"
+
+- name: Process single point fixed rate test with agent
+  template:
+    src: SinglePointFixedRateTestWithAgent.groovy.j2
+    dest: "{{temp_test_dir}}/SinglePointFixedRateTestWithAgent.groovy"
+
+- name: Process single point flexible test
+  template:
+    src: SinglePointFlexibleTest.groovy.j2
+    dest: "{{temp_test_dir}}/SinglePointFlexibleTest.groovy"
+
+- name: Process single point incremental test
+  template:
+    src: SinglePointIncrementalTest.groovy.j2
+    dest: "{{temp_test_dir}}/SinglePointIncrementalTest.groovy"
+
+- name: Process multi point fair incremental test
+  template:
+    src: MultiPointFairIncrementalTest.groovy.j2
+    dest: "{{temp_test_dir}}/MultiPointFairIncrementalTest.groovy"
+
+- name: Process multi point fixed rate test
+  template:
+    src: MultiPointFixedRateTest.groovy.j2
+    dest: "{{temp_test_dir}}/MultiPointFixedRateTest.groovy"
+
+- name: Process multi point fixed rate test with agent
+  template:
+    src: MultiPointFixedRateTestWithAgent.groovy.j2
+    dest: "{{temp_test_dir}}/MultiPointFixedRateTestWithAgent.groovy"
+
+- name: Process multi point incremental test
+  template:
+    src: MultiPointIncrementalTest.groovy.j2
+    dest: "{{temp_test_dir}}/MultiPointIncrementalTest.groovy"
+
+- name: Check config map doesn't already exist
+  shell: oc get configmap test-scripts -n maestro
+  register: config_map_exists
+  failed_when: config_map_exists.stderr != '' and 'NotFound' not in config_map_exists.stderr
+
+- name: Create test script config map
+  shell: oc create configmap test-scripts --from-file={{temp_test_dir}} -n maestro
+  when: config_map_exists.rc != 0
