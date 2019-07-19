@@ -1,0 +1,8 @@
+---
+  - name: Process maestro client template
+    template:
+      src: client.yaml.j2
+      dest: "{{temp_dir}}/client.yaml"
+
+  - name: Apply maestro client
+    shell: oc apply -f {{temp_dir}}/client.yaml -n {{maestro_ns}}

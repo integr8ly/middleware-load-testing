@@ -51,10 +51,10 @@
     dest: "{{temp_test_dir}}/MultiPointIncrementalTest.groovy"
 
 - name: Check config map doesn't already exist
-  shell: oc get configmap test-scripts -n maestro
+  shell: oc get configmap test-scripts -n {{maestro_ns}}
   register: config_map_exists
   failed_when: config_map_exists.stderr != '' and 'NotFound' not in config_map_exists.stderr
 
 - name: Create test script config map
-  shell: oc create configmap test-scripts --from-file={{temp_test_dir}} -n maestro
+  shell: oc create configmap test-scripts --from-file={{temp_test_dir}} -n {{maestro_ns}}
   when: config_map_exists.rc != 0

@@ -1,5 +1,5 @@
 ---
-test_host: fcxhdswyzt
+test_host: bl319r9zbl
 test_message_size: 512
 test_rate: 0
 test_duration: 0d0h5m0s
@@ -7,11 +7,27 @@ test_opts: transport.trustAll=true&transport.verifyHost=false
 test_amqps_url: "amqps://messaging-{{test_host}}.openshift-enmasse.svc:5671/small-queue?{{test_opts}}"
 test_worker_nodes: 2
 
-singlepoint_fair_incremental_test: /test-scripts/FairIncrementalTest.groovy
-singlepoint_fixed_rate_test: /test-scripts/FixedRateTest.groovy
-singlepoint_fixed_rate_agent_test: /test-scripts/FixedRateTestWithAgent.groovy
-singlepoint_flexible_test: /test-scripts/FlexibleTest.groovy
-singlepoint_incremantal_test: /test-scripts/IncrementalTest.groovy
+standard_small_queue: small-queue
+standard_medium_queue: medium-queue
+standard_large_queue: large-queue
+standard_small_topic: small-topic
+standard_medium_topic: medium-topic
+standard_large_topic: large-topic
+standard_small_anycast: small-anycast
+standard_medium_anycast: medium-anycast
+standard_large_anycast: large-anycast
+standard_small_multicast: small-multicast
+standard_medium_multicast: medium-multicast
+standard_large_multicast: large-multicast
+brokered_queue: brokered-queue
+brokered_topic: brokered-topic
+
+singlepoint_fair_incremental_test: /test-scripts/SinglePointFairIncrementalTest.groovy
+singlepoint_fixed_rate_test: /test-scripts/SinglePointFixedRateTest.groovy
+singlepoint_fixed_rate_agent_test: /test-scripts/SinglePointFixedRateTestWithAgent.groovy
+singlepoint_flexible_test: /test-scripts/SinglePointFlexibleTest.groovy
+singlepoint_incremantal_test: /test-scripts/SinglePointIncrementalTest.groovy
 
 enmasse_infra_ns: openshift-enmasse   
 test_ns: maestro-test-addresses
+maestro_ns: maestro

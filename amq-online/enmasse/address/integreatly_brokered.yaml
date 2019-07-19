@@ -4,12 +4,12 @@ items:
   - metadata:
       name: brokered.queue
     spec:
-      address: queue
+      address: brokered-queue
       type: queue
       plan: brokered-queue
   - metadata:
       name: brokered.topic
     spec:
-      address: topic
+      address: brokered-topic
       type: topic
       plan: brokered-topic

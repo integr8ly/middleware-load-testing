@@ -2,7 +2,7 @@
 - hosts: localhost
   gather_facts: no
   tasks:
-  - import_role:
-      name: testcase
   - include_role:
-      name: testcase
+      name: testcase-config
+  - include_role:
+      name: testcase-execute

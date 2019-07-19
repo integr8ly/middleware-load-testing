@@ -11,13 +11,13 @@
   - import_role:
       name: label-nodes
 
-  - name: Check namespace doesn't already exist
-    shell: oc get namespace maestro
+  - name: Check {{maestro_ns}} namespace doesn't already exist
+    shell: oc get namespace {{maestro_ns}}
     register: namespace_exists
     failed_when: namespace_exists.stderr != '' and 'NotFound' not in namespace_exists.stderr
 
-  - name: Creating project maestro
-    shell: oc new-project maestro
+  - name: Creating project {{maestro_ns}}
+    shell: oc new-project {{maestro_ns}}
     when: namespace_exists.rc != 0
 
   - include_role:

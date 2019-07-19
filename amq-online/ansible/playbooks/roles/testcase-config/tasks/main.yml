@@ -2,9 +2,9 @@
 - name: Process test case template
   template:
     src: testcase.yml.j2
-    dest: "{{ test_case_dir }}/testcase.yml"
+    dest: "{{temp_dir}}/testcase.yml"
 
 - name: Apply test case config map
-  shell: oc apply -f {{ test_case_dir }}/testcase.yml -n {{ test_namespace }}
+  shell: oc apply -f {{temp_dir}}/testcase.yml -n {{ maestro_ns }}
   register: output
 

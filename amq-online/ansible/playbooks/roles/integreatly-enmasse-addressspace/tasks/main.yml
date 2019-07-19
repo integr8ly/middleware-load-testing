@@ -4,7 +4,7 @@
   register: namespace_exists
   failed_when: namespace_exists.stderr != '' and 'NotFound' not in namespace_exists.stderr
 
-- name: Creating project maestro
+- name: Creating project {{test_ns}}
   shell: oc new-project {{test_ns}}
   when: namespace_exists.rc != 0 
 
@@ -40,7 +40,7 @@
   shell: oc get addressspace standard -o jsonpath={.status.isReady}
   register: task_result
   until: '"true" in task_result.stdout_lines' 
-  retries: 25
+  retries: 30
   delay: 5
   failed_when: task_result.rc != 0
   
@@ -48,6 +48,6 @@
   shell: oc get addressspace brokered -o jsonpath={.status.isReady}
   register: task_result_brokered
   until: '"true" in task_result_brokered.stdout_lines' 
-  retries: 25
+  retries: 30
   delay: 5
   failed_when: task_result_brokered.rc != 0

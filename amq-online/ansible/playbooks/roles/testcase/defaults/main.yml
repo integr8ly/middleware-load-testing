@@ -1,3 +1,0 @@
----
-test_case_dir: "{{ temp_dir }}"
-test_namespace: maestro
