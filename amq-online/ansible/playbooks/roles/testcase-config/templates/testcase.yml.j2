@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: client-config
 data: 
-  sendReceiveUrl: amqps://messaging-bl319r9zbl.openshift-enmasse.svc:5671/small-queue?transport.trustAll=true&transport.verifyHost=false
+  sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_queue_test.address}}?transport.trustAll=true&transport.verifyHost=false
   messageSize: "512"
   testDuration: "0d0h0m30s"
   testCase: /test-scripts/SinglePointFixedRateTest.groovy

@@ -1,10 +1,8 @@
 ---
-test_host: bl319r9zbl
 test_message_size: 512
 test_rate: 0
 test_duration: 0d0h5m0s
 test_opts: transport.trustAll=true&transport.verifyHost=false
-test_amqps_url: "amqps://messaging-{{test_host}}.openshift-enmasse.svc:5671/small-queue?{{test_opts}}"
 test_worker_nodes: 2
 
 standard_small_queue: small-queue

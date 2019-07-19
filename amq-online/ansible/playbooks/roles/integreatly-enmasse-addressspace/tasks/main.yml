@@ -37,17 +37,17 @@
   when: brokered_addressspace_exists.rc != 0
 
 - name: Check if standard address space has created successfully
-  shell: oc get addressspace standard -o jsonpath={.status.isReady}
+  shell: oc get addressspace standard -n {{test_ns}} -o jsonpath={.status.isReady}
   register: task_result
   until: '"true" in task_result.stdout_lines' 
-  retries: 30
+  retries: 50
   delay: 5
   failed_when: task_result.rc != 0
   
 - name: Check if brokered address space has created successfully
-  shell: oc get addressspace brokered -o jsonpath={.status.isReady}
+  shell: oc get addressspace brokered -n {{test_ns}} -o jsonpath={.status.isReady}
   register: task_result_brokered
   until: '"true" in task_result_brokered.stdout_lines' 
-  retries: 30
+  retries: 50
   delay: 5
   failed_when: task_result_brokered.rc != 0

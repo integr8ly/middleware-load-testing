@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Remove {{test_ns}} project
+    shell: oc delete project {{test_ns}}
+
+  - name: Remove {{maestro_ns}} project
+    shell: oc delete project {{maestro_ns}}
+
+  - name: Remove none auth service
+    shell: oc delete authenticationservice none-authservice -n {{enmasse_infra_ns}}
+
