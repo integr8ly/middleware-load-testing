@@ -14,16 +14,79 @@ standard_large_multicast: large-multicast
 brokered_queue: brokered-queue
 brokered_topic: brokered-topic
 
+standard_message_size: "512"
+small_test_duration: "0d0h0m30s"
+test_rate: "0"
+
+test_opts: transport.trustAll=true&transport.verifyHost=false
+
+singlepoint_fair_incremental_test: /test-scripts/SinglePointFairIncrementalTest.groovy
+singlepoint_fixed_rate_test: /test-scripts/SinglePointFixedRateTest.groovy
+singlepoint_fixed_rate_agent_test: /test-scripts/SinglePointFixedRateTestWithAgent.groovy
+singlepoint_flexible_test: /test-scripts/SinglePointFlexibleTest.groovy
+singlepoint_incremantal_test: /test-scripts/SinglePointIncrementalTest.groovy
+
 test_configs:
-  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?transport.trustAll=true&transport.verifyHost=false
-    messageSize: "512"
-    testDuration: "0d0h0m30s"
-    testCase: /test-scripts/SinglePointFixedRateTest.groovy
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
     name: "{{standard_small_queue}}-test-config"
     id: "1"
-  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_queue}}?transport.trustAll=true&transport.verifyHost=false
-    messageSize: "512"
-    testDuration: "0d0h0m30s"
-    testCase: /test-scripts/SinglePointFixedRateTest.groovy
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_queue}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
     name: "{{standard_medium_queue}}-test-config"
     id: "2"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_queue}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_large_queue}}-test-config"
+    id: "3"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_anycast}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_small_anycast}}-test-config"
+    id: "4"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_anycast}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_medium_anycast}}-test-config"
+    id: "5"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_anycast}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_large_anycast}}-test-config"
+    id: "6"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_multicast}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_small_multicast}}-test-config"
+    id: "7"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_multicast}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_medium_multicast}}-test-config"
+    id: "8"
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_multicast}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fixed_rate_test}}"
+    rate: "0"
+    name: "{{standard_large_multicast}}-test-config"
+    id: "9"

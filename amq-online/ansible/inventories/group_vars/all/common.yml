@@ -1,16 +1,5 @@
 ---
-test_message_size: 512
-test_rate: 0
-test_duration: 0d0h5m0s
-test_opts: transport.trustAll=true&transport.verifyHost=false
 test_worker_nodes: 2
-
-singlepoint_fair_incremental_test: /test-scripts/SinglePointFairIncrementalTest.groovy
-singlepoint_fixed_rate_test: /test-scripts/SinglePointFixedRateTest.groovy
-singlepoint_fixed_rate_agent_test: /test-scripts/SinglePointFixedRateTestWithAgent.groovy
-singlepoint_flexible_test: /test-scripts/SinglePointFlexibleTest.groovy
-singlepoint_incremantal_test: /test-scripts/SinglePointIncrementalTest.groovy
-
 enmasse_infra_ns: openshift-enmasse   
 test_ns: maestro-test-addresses
 maestro_ns: maestro
