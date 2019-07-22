@@ -6,3 +6,5 @@
 
   - name: Apply maestro client
     shell: oc apply -f {{temp_dir}}/client.yaml -n {{maestro_ns}}
+
+    
