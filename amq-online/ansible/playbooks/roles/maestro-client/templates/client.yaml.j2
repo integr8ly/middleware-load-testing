@@ -27,91 +27,91 @@ spec:
         - name: SEND_RECEIVE_URL
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: sendReceiveUrl
               optional: true
         - name: SEND_URL
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: sendUrl
               optional: true
         - name: RECEIVE_URL
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: receiveUrl
               optional: true
         - name: MESSAGE_SIZE
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: messageSize
               optional: true
         - name: RATE
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: rate
               optional: true
         - name: TEST_DURATION
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: testDuration
               optional: true
         - name: TEST_DESCRIPTION
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: testDescription
               optional: true
         - name: TEST_COMMENT
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: testComment
               optional: true
         - name: PARALLEL_COUNT
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: parallelCount
               optional: true
         - name: DISTRIBUTION_STRATEGY
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: distributionStrategy
               optional: true
         - name: LOG_LEVEL
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: logLevel
               optional: true
         - name: INSPECTOR_NAME
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: inspectorName
               optional: true
         - name: MANAGEMENT_INTERFACE
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: managementInterface
               optional: true
         - name: ENDPOINT_RESOLVER_NAME
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: endpointResolverName
               optional: true
         - name: TEST_CASE
           valueFrom:
             configMapKeyRef:
-              name: client-config
+              name: {{ item.name }}
               key: testCase
       volumeMounts:
         - mountPath: /opt/maestro/maestro-cli/scripts
@@ -121,7 +121,7 @@ spec:
   volumes:
     - name: config
       configMap:
-        name: small-queue-test-config
+        name: {{ item.name }}
     - name: test-scripts
       configMap:
         name: test-scripts

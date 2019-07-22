@@ -3,6 +3,4 @@
   gather_facts: no
   tasks:
   - include_role:
-      name: testcase-config
-  - include_role:
-      name: testcase-execute
+        name: maestro-client

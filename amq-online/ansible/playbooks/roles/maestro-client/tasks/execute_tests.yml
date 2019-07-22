@@ -1,0 +1,27 @@
+---
+- name: Process maestro client template
+  template:
+      src: client.yaml.j2
+      dest: "{{temp_dir}}/client.yaml"
+
+- name: Apply maestro client
+  shell: oc apply -f {{temp_dir}}/client.yaml -n {{maestro_ns}}
+
+- name: Ensure maestro client is running
+  shell: oc get pod maestro-client -o jsonpath='{.status.phase}' -n maestro
+  register: result
+  until: result.stdout == "Running"
+  retries: 20
+  delay: 10
+  changed_when: False
+
+- name: Check maestro test has finished
+  shell: oc get pod maestro-client -o jsonpath='{.status.phase}' -n maestro
+  register: result
+  until: result.stdout == "Succeeded"
+  retries: 50
+  delay: 20
+  changed_when: False
+
+- name: Remove current client deployment
+  shell: oc delete -f {{temp_dir}}/client.yaml -n {{maestro_ns}}

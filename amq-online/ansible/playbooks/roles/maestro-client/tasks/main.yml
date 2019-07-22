@@ -26,3 +26,7 @@
 - name: Apply test case config map
   shell: oc apply -f {{temp_dir}}/testcase-{{item.id}}.yml -n {{ maestro_ns }}
   with_items: "{{test_configs}}"
+
+- include: execute_tests.yml pkgName="{{item}}"
+  with_items: "{{ test_configs }}"
+    
