@@ -1,4 +1,5 @@
 ---
+# Standard test addresses 
 standard_small_queue: small-queue
 standard_medium_queue: medium-queue
 standard_large_queue: large-queue
@@ -14,79 +15,130 @@ standard_large_multicast: large-multicast
 brokered_queue: brokered-queue
 brokered_topic: brokered-topic
 
+# Common test variables
 standard_message_size: "512"
-small_test_duration: "0d0h0m30s"
+small_test_duration: "0d0h2m0s"
 test_rate: "0"
-
 test_opts: transport.trustAll=true&transport.verifyHost=false
+max_latency: "150000"
+ceiling_rate: "20000"
+ceiling_parallel_count: "101"
+parallel_count_increment: "100"
 
+# Fair incremental test variables
+standard_combined_rate: "1000"
+initial_parallel_count: "1"
+standard_steps: "100"
+combined_rate: "10000"
+
+# Incremental test variables
+initial_rate: "2000"
+rate_increment: "1000"
+inital_parallel_count: "1"
+
+# Test script locations
 singlepoint_fair_incremental_test: /test-scripts/SinglePointFairIncrementalTest.groovy
 singlepoint_fixed_rate_test: /test-scripts/SinglePointFixedRateTest.groovy
 singlepoint_fixed_rate_agent_test: /test-scripts/SinglePointFixedRateTestWithAgent.groovy
 singlepoint_flexible_test: /test-scripts/SinglePointFlexibleTest.groovy
 singlepoint_incremantal_test: /test-scripts/SinglePointIncrementalTest.groovy
 
-test_configs:
+# Baseline test configurations
+basline_test_configs:
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_small_queue}}-test-config"
+    name: "{{standard_small_queue}}-test"
     id: "1"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_medium_queue}}-test-config"
+    name: "{{standard_medium_queue}}-test"
     id: "2"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_large_queue}}-test-config"
+    name: "{{standard_large_queue}}-test"
     id: "3"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_small_anycast}}-test-config"
+    name: "{{standard_small_anycast}}-test"
     id: "4"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_medium_anycast}}-test-config"
+    name: "{{standard_medium_anycast}}-test"
     id: "5"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_large_anycast}}-test-config"
+    name: "{{standard_large_anycast}}-test"
     id: "6"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_small_multicast}}-test-config"
+    name: "{{standard_small_multicast}}-test"
     id: "7"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_medium_multicast}}-test-config"
+    name: "{{standard_medium_multicast}}-test"
     id: "8"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
     testDuration: "{{small_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
-    name: "{{standard_large_multicast}}-test-config"
+    name: "{{standard_large_multicast}}-test"
     id: "9"
+
+# Fair incremental test configurations
+fair_increment_test_configs:
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_fair_incremental_test}}"
+    rate: "0"
+    name: "{{standard_small_queue}}-test"
+    id: "1"
+    combinedRate: "{{standard_combined_rate}}"
+    initialParallelCount: "{{initial_parallel_count}}"
+    ceilingParallelCount: "{{ceiling_parallel_count}}"
+    parallelCountIncrement: "{{parallel_count_increment}}"
+    steps: "{{standard_steps}}"
+    ceilingRate: "{{ceiling_rate}}"
+    maxLatency: "{{max_latency}}"
+
+# Incremental test configurations
+increment_test_configs:
+  - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
+    messageSize: "{{standard_message_size}}"
+    testDuration: "{{small_test_duration}}"
+    testCase: "{{singlepoint_incremantal_test}}"
+    rate: "0"
+    name: "{{standard_small_queue}}-test"
+    id: "1"
+    initialRate: "{{initial_rate}}"
+    ceilingRate: "{{ceiling_rate}}"
+    rateIncrement: "{{rate_increment}}"
+    initalParallelCount: "{{inital_parallel_count }}"
+    ceilingParallelCount: "{{ceiling_parallel_count }}"
+    parallelCountIncrement: "{{parallel_count_increment }}"
+    maxLatency: "{{max_latency}}"

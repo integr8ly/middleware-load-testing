@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{item.name}}
+data: 
+  sendReceiveUrl: {{item.sendReceiveUrl}}
+  messageSize: "{{item.messageSize}}"
+  testDuration: "{{item.testDuration}}"
+  rate: "{{item.rate}}"
+  testCase: {{item.testCase}}
+  warmUp: "true"
+  initialParallelCount: "{{item.initialParallelCount}}"
+  ceilingParallelCount: "{{item.ceilingParallelCount}}"
+  parallelCountIncrement: "{{item.parallelCountIncrement}}"
+  steps: "{{item.steps}}"
+  combinedRate: "{{item.combinedRate}}"
+  ceilingRate: "{{item.ceilingRate}}"
+  maxLatency: "{{item.maxLatency}}"
+  maestro-cli.properties: |
+        warm-up.message.count=10000
+        warm-up.rate.percent=10
+        warm-up.ceiling.parallel.count=1
+        maestro.worker.stop.timeout=60000
+
+

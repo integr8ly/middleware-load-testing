@@ -17,16 +17,42 @@
   set_fact:
     brokered_uidd: "{{brokered_addressspace.stdout}}"
 
-- name: Process test case template
+- name: Process baseline test case template
   template:
-    src: testcase.yml.j2
-    dest: "{{temp_dir}}/testcase-{{item.id}}.yml"
-  with_items: "{{ test_configs }}"
+    src: baseline-testcase.yaml.j2
+    dest: "{{temp_dir}}/baseline-testcase-{{item.id}}.yml"
+  with_items: "{{ basline_test_configs }}"
 
-- name: Apply test case config map
-  shell: oc apply -f {{temp_dir}}/testcase-{{item.id}}.yml -n {{ maestro_ns }}
-  with_items: "{{test_configs}}"
+- name: Apply baseline test case config map
+  shell: oc apply -f {{temp_dir}}/baseline-testcase-{{item.id}}.yml -n {{ maestro_ns }}
+  with_items: "{{basline_test_configs}}"
 
-- include: execute_tests.yml pkgName="{{item}}"
-  with_items: "{{ test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
+
+- name: Process fair increment test case template
+  template:
+    src: fair-increment-testcase.yaml.j2
+    dest: "{{temp_dir}}/fair-increment-testcase-{{item.id}}.yml"
+  with_items: "{{ fair_increment_test_configs }}"
+
+- name: Apply fair increment test case config map
+  shell: oc apply -f {{temp_dir}}/fair-increment-testcase-{{item.id}}.yml -n {{ maestro_ns }}
+  with_items: "{{fair_increment_test_configs}}"
+
+- include: execute_fair_increment_tests.yml pkgName="{{item}}"
+  with_items: "{{ fair_increment_test_configs }}"
+    
+- name: Process increment test case template
+  template:
+    src: increment-testcase.yaml.j2
+    dest: "{{temp_dir}}/increment-testcase-{{item.id}}.yml"
+  with_items: "{{ increment_test_configs }}"
+
+- name: Apply increment test case config map
+  shell: oc apply -f {{temp_dir}}/increment-testcase-{{item.id}}.yml -n {{ maestro_ns }}
+  with_items: "{{increment_test_configs }}"
+
+- include: execute_increment_tests.yml pkgName="{{item}}"
+  with_items: "{{ increment_test_configs }}"
     
