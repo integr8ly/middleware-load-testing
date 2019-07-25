@@ -1,8 +1,8 @@
 ---
 - name: Process maestro fair increment client template
   template:
-      src: fair_increment-client.yaml.j2
-      dest: "{{temp_dir}}/fair_increment-client.yaml"
+      src: fair-increment-client.yaml.j2
+      dest: "{{temp_dir}}/fair-increment-client.yaml"
 
 - name: Apply maestro client
   shell: oc apply -f {{temp_dir}}/fair_increment-client.yaml -n {{maestro_ns}}
@@ -24,4 +24,4 @@
   changed_when: False
 
 - name: Remove current client deployment
-  shell: oc delete -f {{temp_dir}}/client.yaml -n {{maestro_ns}}
+  shell: oc delete -f {{temp_dir}}/fair-increment-client.yaml -n {{maestro_ns}}

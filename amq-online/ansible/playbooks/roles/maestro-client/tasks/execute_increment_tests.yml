@@ -24,4 +24,4 @@
   changed_when: False
 
 - name: Remove current client deployment
-  shell: oc delete -f {{temp_dir}}/client.yaml -n {{maestro_ns}}
+  shell: oc delete -f {{temp_dir}}/increment-client.yaml -n {{maestro_ns}}

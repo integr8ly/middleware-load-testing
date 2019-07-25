@@ -17,24 +17,26 @@ brokered_topic: brokered-topic
 
 # Common test variables
 standard_message_size: "512"
-small_test_duration: "0d0h2m0s"
 test_rate: "0"
 test_opts: transport.trustAll=true&transport.verifyHost=false
-max_latency: "150000"
-ceiling_rate: "20000"
+max_latency: "1500000"
+ceiling_rate: "51000"
 ceiling_parallel_count: "101"
 parallel_count_increment: "100"
+
+# Bast test variables
+base_test_duration: "0d0h2m00s"
 
 # Fair incremental test variables
 standard_combined_rate: "1000"
 initial_parallel_count: "1"
-standard_steps: "100"
-combined_rate: "10000"
+standard_steps: "5"
 
 # Incremental test variables
-initial_rate: "2000"
-rate_increment: "1000"
+initial_rate: "1000"
+rate_increment: "10000"
 inital_parallel_count: "1"
+fair_test_duration: "0d0h2m0s"
 
 # Test script locations
 singlepoint_fair_incremental_test: /test-scripts/SinglePointFairIncrementalTest.groovy
@@ -47,63 +49,63 @@ singlepoint_incremantal_test: /test-scripts/SinglePointIncrementalTest.groovy
 basline_test_configs:
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_small_queue}}-test"
     id: "1"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_medium_queue}}-test"
     id: "2"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_large_queue}}-test"
     id: "3"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_small_anycast}}-test"
     id: "4"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_medium_anycast}}-test"
     id: "5"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_large_anycast}}-test"
     id: "6"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_small_multicast}}-test"
     id: "7"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_medium_multicast}}-test"
     id: "8"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{base_test_duration}}"
     testCase: "{{singlepoint_fixed_rate_test}}"
     rate: "0"
     name: "{{standard_large_multicast}}-test"
@@ -113,7 +115,7 @@ basline_test_configs:
 fair_increment_test_configs:
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_fair_incremental_test}}"
     rate: "0"
     name: "{{standard_small_queue}}-test"
@@ -130,7 +132,7 @@ fair_increment_test_configs:
 increment_test_configs:
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_small_queue}}-test"
@@ -144,7 +146,7 @@ increment_test_configs:
     maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_medium_queue}}-test"
@@ -158,7 +160,7 @@ increment_test_configs:
     maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_queue}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_large_queue}}-test"
@@ -170,10 +172,9 @@ increment_test_configs:
     ceilingParallelCount: "{{ceiling_parallel_count }}"
     parallelCountIncrement: "{{parallel_count_increment }}"
     maxLatency: "{{max_latency}}"
-    maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_small_anycast}}-test"
@@ -185,10 +186,9 @@ increment_test_configs:
     ceilingParallelCount: "{{ceiling_parallel_count }}"
     parallelCountIncrement: "{{parallel_count_increment }}"
     maxLatency: "{{max_latency}}"
-    maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_medium_anycast}}-test"
@@ -200,10 +200,9 @@ increment_test_configs:
     ceilingParallelCount: "{{ceiling_parallel_count }}"
     parallelCountIncrement: "{{parallel_count_increment }}"
     maxLatency: "{{max_latency}}"
-    maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_anycast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_large_anycast}}-test"
@@ -217,7 +216,7 @@ increment_test_configs:
     maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_small_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_small_multicast}}-test"
@@ -231,7 +230,7 @@ increment_test_configs:
     maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_medium_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_medium_multicast}}-test"
@@ -245,7 +244,7 @@ increment_test_configs:
     maxLatency: "{{max_latency}}"
   - sendReceiveUrl: amqps://messaging-{{standard_uidd}}.openshift-enmasse.svc:5671/{{standard_large_multicast}}?{{test_opts}}
     messageSize: "{{standard_message_size}}"
-    testDuration: "{{small_test_duration}}"
+    testDuration: "{{fair_test_duration}}"
     testCase: "{{singlepoint_incremantal_test}}"
     rate: "0"
     name: "{{standard_large_multicast}}-test"

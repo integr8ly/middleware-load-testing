@@ -113,6 +113,11 @@ spec:
             configMapKeyRef:
               name: {{ item.name }}
               key: testCase
+        - name: WARM_UP
+          valueFrom:
+            configMapKeyRef:
+              name: {{ item.name }}
+              key: warmUp
       volumeMounts:
         - mountPath: /opt/maestro/maestro-cli/scripts
           name: config

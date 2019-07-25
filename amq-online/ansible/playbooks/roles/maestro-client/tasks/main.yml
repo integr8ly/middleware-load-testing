@@ -30,18 +30,18 @@
 - include: execute_baseline_tests.yml pkgName="{{item}}"
   with_items: "{{ basline_test_configs }}"
 
-- name: Process fair increment test case template
-  template:
-    src: fair-increment-testcase.yaml.j2
-    dest: "{{temp_dir}}/fair-increment-testcase-{{item.id}}.yml"
-  with_items: "{{ fair_increment_test_configs }}"
+# - name: Process fair increment test case template
+#   template:
+#     src: fair-increment-testcase.yaml.j2
+#     dest: "{{temp_dir}}/fair-increment-testcase-{{item.id}}.yml"
+#   with_items: "{{ fair_increment_test_configs }}"
 
-- name: Apply fair increment test case config map
-  shell: oc apply -f {{temp_dir}}/fair-increment-testcase-{{item.id}}.yml -n {{ maestro_ns }}
-  with_items: "{{fair_increment_test_configs}}"
+# - name: Apply fair increment test case config map
+#   shell: oc apply -f {{temp_dir}}/fair-increment-testcase-{{item.id}}.yml -n {{ maestro_ns }}
+#   with_items: "{{fair_increment_test_configs}}"
 
-- include: execute_fair_increment_tests.yml pkgName="{{item}}"
-  with_items: "{{ fair_increment_test_configs }}"
+# - include: execute_fair_increment_tests.yml pkgName="{{item}}"
+#   with_items: "{{ fair_increment_test_configs }}"
     
 - name: Process increment test case template
   template:
