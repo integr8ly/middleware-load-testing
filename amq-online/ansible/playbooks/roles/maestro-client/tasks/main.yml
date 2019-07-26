@@ -43,16 +43,16 @@
 # - include: execute_fair_increment_tests.yml pkgName="{{item}}"
 #   with_items: "{{ fair_increment_test_configs }}"
     
-- name: Process increment test case template
-  template:
-    src: increment-testcase.yaml.j2
-    dest: "{{temp_dir}}/increment-testcase-{{item.id}}.yml"
-  with_items: "{{ increment_test_configs }}"
+# - name: Process increment test case template
+#   template:
+#     src: increment-testcase.yaml.j2
+#     dest: "{{temp_dir}}/increment-testcase-{{item.id}}.yml"
+#   with_items: "{{ increment_test_configs }}"
 
-- name: Apply increment test case config map
-  shell: oc apply -f {{temp_dir}}/increment-testcase-{{item.id}}.yml -n {{ maestro_ns }}
-  with_items: "{{increment_test_configs }}"
+# - name: Apply increment test case config map
+#   shell: oc apply -f {{temp_dir}}/increment-testcase-{{item.id}}.yml -n {{ maestro_ns }}
+#   with_items: "{{increment_test_configs }}"
 
-- include: execute_increment_tests.yml pkgName="{{item}}"
-  with_items: "{{ increment_test_configs }}"
+# - include: execute_increment_tests.yml pkgName="{{item}}"
+#   with_items: "{{ increment_test_configs }}"
     

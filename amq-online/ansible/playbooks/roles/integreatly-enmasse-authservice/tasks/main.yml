@@ -4,15 +4,6 @@
     src: none-authservice.yaml.j2
     dest: "{{temp_dir}}/none-authservice.yaml"
 
-- name: Check standard authservice doesn't already exist
-  shell: oc get authenticationservice standard-authservice -n {{ enmasse_infra_ns }}
-  register: authservice_exists
-  failed_when: authservice_exists.stderr != '' and 'NotFound' not in authservice_exists.stderr
-
-- name: Delete standard authservice
-  shell: oc delete authenticationservice standard-authservice -n {{ enmasse_infra_ns }}
-  when: authservice_exists.rc == 0
-
 - name: Check none authservice doesn't already exist
   shell: oc get authenticationservice none-authservice -n {{ enmasse_infra_ns }}  
   register: none_authservice_exists
