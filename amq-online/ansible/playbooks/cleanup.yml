@@ -8,6 +8,9 @@
   - name: Remove {{maestro_ns}} project
     shell: oc delete project {{maestro_ns}}
 
+  # - name: Remove {{maria_project}} project
+  #   shell: oc delete project {{maria_project}}
+
   - name: Remove none auth service
     shell: oc delete authenticationservice none-authservice -n {{enmasse_infra_ns}}
 

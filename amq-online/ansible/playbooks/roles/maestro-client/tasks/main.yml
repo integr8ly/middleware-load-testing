@@ -17,18 +17,7 @@
   set_fact:
     brokered_uidd: "{{brokered_addressspace.stdout}}"
 
-- name: Process baseline test case template
-  template:
-    src: baseline-testcase.yaml.j2
-    dest: "{{temp_dir}}/baseline-testcase-{{item.id}}.yml"
-  with_items: "{{ basline_test_configs }}"
-
-- name: Apply baseline test case config map
-  shell: oc apply -f {{temp_dir}}/baseline-testcase-{{item.id}}.yml -n {{ maestro_ns }}
-  with_items: "{{basline_test_configs}}"
-
-- include: execute_baseline_tests.yml pkgName="{{item}}"
-  with_items: "{{ basline_test_configs }}"
+- include: baseline_run.yml
 
 # - name: Process fair increment test case template
 #   template:

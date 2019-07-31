@@ -1,5 +1,7 @@
 ---
 test_worker_nodes: 2
+worker_nodes_run_2: 10
 enmasse_infra_ns: openshift-enmasse   
 test_ns: maestro-test-addresses
 maestro_ns: maestro
+maria_project: "maestro-mariadb"

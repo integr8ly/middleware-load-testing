@@ -35,8 +35,11 @@
   - include_role:
       name: maestro-broker
 
+#   - include_role:
+#       name: maestro-reports
+
   - include_role:
-      name: maestro-reports
+      name: maestro-reports-db
 
   - include_role:
       name: maestro-worker

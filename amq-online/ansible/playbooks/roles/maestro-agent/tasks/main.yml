@@ -5,4 +5,4 @@
     dest: "{{temp_dir}}/agent-deployment.yaml"
 
 - name: Create maestro agent
-  shell: oc apply -f {{temp_dir}}/agent-deployment.yaml
+  shell: oc apply -f {{temp_dir}}/agent-deployment.yaml -n {{maestro_ns}}

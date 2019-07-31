@@ -5,4 +5,4 @@
     dest: "{{temp_dir}}/inspector-deployment.yaml"
 
 - name: Create maestro inspector
-  shell: oc apply -f {{temp_dir}}/inspector-deployment.yaml
+  shell: oc apply -f {{temp_dir}}/inspector-deployment.yaml -n {{maestro_ns}}

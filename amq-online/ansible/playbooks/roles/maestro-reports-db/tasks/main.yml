@@ -1,0 +1,58 @@
+---
+  # - name: Create maestro maria db project
+  #   shell: oc new-project {{maria_project}}
+
+  - name: Create MariaDB deployment
+    shell: oc new-app -e MYSQL_USER={{mysql_user}} -e MYSQL_PASSWORD={{mysql_password}} -e MYSQL_DATABASE={{mysql_db}} centos/mariadb-101-centos7 -n {{maestro_ns}}
+
+  - name: Ensure MariaDB replicas are ready
+    shell: oc get deploymentconfig {{maria_name}} -o jsonpath='{.status.availableReplicas}' -n {{maestro_ns}}
+    register: availableReplicas
+    until: availableReplicas.stdout == "{{maria_replicas}}"
+    retries: 20
+    delay: 5
+    changed_when: False 
+
+  - name: Expose maestro maria db reports 
+    shell: oc expose {{maria_svc}} --hostname=reportsdb.{{ hostvars['MASTER_CONFIG']['routing_subdomain'] }} -n {{maestro_ns}}
+
+  - name: Ensure MariaDB route is ready
+    shell: oc get route mariadb-101-centos7 -o jsonpath='{.status.ingress[0].conditions[0].status}' -n {{maestro_ns}}
+    register: exposedRoute
+    until: exposedRoute.stdout == "True"
+    retries: 20
+    delay: 5
+    changed_when: False 
+
+  - name: Fetch MariaDB URL
+    shell:  oc get route mariadb-101-centos7 -o jsonpath='{.status.ingress[0].host}' -n {{maestro_ns}}
+    register: mariadb_address
+    changed_when: False
+
+  - name: Set MariaDB URL
+    set_fact:
+      maria_url: "{{mariadb_address.stdout}}"
+
+  - name: Process maestro reports deployment template
+    template:
+      src: results-deployment.yaml.j2
+      dest: "{{temp_dir}}/results-deployment.yaml"
+
+  - name: Process maestro reports pvc template
+    template:
+      src: results-pvc.yaml.j2
+      dest: "{{temp_dir}}/results-pvc.yaml"
+
+  - name: Process maestro reports service template
+    template:
+      src: results-service.yaml.j2
+      dest: "{{temp_dir}}/results-service.yaml"
+
+  - name: Create maestro results pvc
+    shell: oc create -f {{temp_dir}}/results-pvc.yaml -n {{maestro_ns}}
+
+  - name: Create maestro results service and deployment
+    shell: oc create -f {{temp_dir}}/results-service.yaml -f {{temp_dir}}/results-deployment.yaml -n {{maestro_ns}}
+
+  - name: Expose maestro results route
+    shell: oc expose service results-external --hostname=results.{{ hostvars['MASTER_CONFIG']['routing_subdomain'] }} -n {{maestro_ns}}

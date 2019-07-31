@@ -20,7 +20,7 @@
   register: result
   until: result.stdout != "Running"
   retries: 600
-  delay: 100
+  delay: 20
   changed_when: False
 
 - name: Remove current client deployment

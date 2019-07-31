@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: results-external
+  labels:
+    app: maestro
+    env: staging
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 6500
+      nodePort: 31002
+  selector:
+    app: maestro
+    component: results

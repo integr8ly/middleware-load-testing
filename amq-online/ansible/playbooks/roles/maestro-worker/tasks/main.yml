@@ -5,7 +5,7 @@
     dest: "{{temp_dir}}/worker-deployment.yaml"
 
 - name: Create maestro worker
-  shell: oc apply -f {{temp_dir}}/worker-deployment.yaml
+  shell: oc apply -f {{temp_dir}}/worker-deployment.yaml -n {{maestro_ns}}
 
 - name: Scale maestro worker to {{test_worker_nodes}} nodes
-  shell: oc scale deployment --replicas={{test_worker_nodes}} maestro-worker
+  shell: oc scale deployment --replicas={{test_worker_nodes}} maestro-worker -n {{maestro_ns}}
