@@ -10,6 +10,27 @@ This guide covers setting up/tearing down tests, changing storage settings etc.
 
 - Integreatly POC Cluster 
 
+## Running tests
+Ansible can be used to automate the configuration and execution of the PERF tests. The steps needed are detailed below
+
+## Using Ansible
+First, we need to update our inventory to point to your master cluster. Navigate to the `ansible` directory and run the following command
+```
+cp inventories/inventory.template inventories/inventory
+```
+Update the `[master]` variable to the public URL of your master node
+
+To setup the testing infrastructure, this will include testing `addressspaces` and `addresses` along with the `maestro` framework run the following:
+```
+ansible-playbook -i inventories/inventory playbooks/install.yml
+```
+Once the playbook has completed run the following to execute the load tests
+```
+ansible-playbook -i inventories/inventory playbooks/execute_tests.yml
+```
+Test results can be found at `reports-your-subdomain.com`
+
+## Manual Setup and Execution
 ### Creating addresses
 To meet the description use cases outlined above a number of addresses need to be created.
 
