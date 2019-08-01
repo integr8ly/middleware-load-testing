@@ -1,0 +1,10 @@
+---
+- block:
+  - name: Retrieve master configurations
+    slurp:
+      src: "{{ master_config_path }}"
+    register: master_config
+    become: yes
+  - add_host:
+      name: MASTER_CONFIG
+      routing_subdomain: "{{ (master_config['content'] | b64decode | from_yaml)['routingConfig']['subdomain'] }}"

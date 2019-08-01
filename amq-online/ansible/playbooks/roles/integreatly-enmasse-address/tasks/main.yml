@@ -1,0 +1,16 @@
+---
+- name: Process standard address template
+  template:
+    src: integreatly_standard.yaml.j2
+    dest: "{{temp_dir}}/integreatly_standard.yaml"
+
+- name: Create standard addresses
+  shell: oc apply -f {{temp_dir}}/integreatly_standard.yaml -n {{test_ns}}
+
+- name: Process brokered address template
+  template:
+    src: integreatly_brokered.yaml.j2
+    dest: "{{temp_dir}}/integreatly_brokered.yaml"
+
+- name: Create brokered addresses
+  shell: oc apply -f {{temp_dir}}/integreatly_brokered.yaml -n {{test_ns}}

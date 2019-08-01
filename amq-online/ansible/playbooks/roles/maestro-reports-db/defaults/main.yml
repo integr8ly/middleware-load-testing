@@ -1,0 +1,8 @@
+---
+mysql_user: "maestro"
+mysql_password: "maestroReports"
+mysql_db: "maestro"
+maria_image: "centos/mariadb-101-centos7"
+maria_name: "mariadb-101-centos7"
+maria_svc: "svc/mariadb-101-centos7"
+maria_replicas: 1
