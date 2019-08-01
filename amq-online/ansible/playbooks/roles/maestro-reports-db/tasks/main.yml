@@ -1,7 +1,4 @@
 ---
-  # - name: Create maestro maria db project
-  #   shell: oc new-project {{maria_project}}
-
   - name: Create MariaDB deployment
     shell: oc new-app -e MYSQL_USER={{mysql_user}} -e MYSQL_PASSWORD={{mysql_password}} -e MYSQL_DATABASE={{mysql_db}} centos/mariadb-101-centos7 -n {{maestro_ns}}
 

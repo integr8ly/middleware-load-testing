@@ -12,28 +12,28 @@
 - include: execute_baseline_tests.yml pkgName="{{item}}"
   with_items: "{{ basline_test_configs }}"
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
 
-# - name: Scale maestro worker to {{worker_nodes_run_2}} nodes
-#   shell: oc scale deployment --replicas={{worker_nodes_run_2}} maestro-worker -n {{ maestro_ns }} 
+- name: Scale maestro worker to {{worker_nodes_run_2}} nodes
+  shell: oc scale deployment --replicas={{worker_nodes_run_2}} maestro-worker -n {{ maestro_ns }} 
 
-# - name: Ensure maestro worker replicas are ready
-#   shell: oc get deployment maestro-worker -o jsonpath='{.status.availableReplicas}' -n {{maestro_ns}}
-#   register: availableReplicas
-#   until: availableReplicas.stdout == "{{worker_nodes_run_2}}"
-#   retries: 20
-#   delay: 5
-#   changed_when: False      
+- name: Ensure maestro worker replicas are ready
+  shell: oc get deployment maestro-worker -o jsonpath='{.status.availableReplicas}' -n {{maestro_ns}}
+  register: availableReplicas
+  until: availableReplicas.stdout == "{{worker_nodes_run_2}}"
+  retries: 20
+  delay: 5
+  changed_when: False      
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
