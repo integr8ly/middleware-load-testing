@@ -17,20 +17,20 @@ Known limits of 3scale
 1. System-Provider & System-Developer
     - This component scales **horizontally** by adding more PODs
 1. Backend-Worker
-    - Pod anit-affinity rule is important here
+    - Pod anti-affinity rule is important here
     - Critical functionality -- rate limits depend on this component
     - Depending on the number of reports you should check the lenght of the redis queues for jobs
     - Can be scaled **horizontally** by adding more pods as needed.
 1. System-Redis
-    - **Vertical** scaling of each nore (core) redis run on: 
+    - **Vertical** scaling of each node (core) redis run on: 
         - Redis is a single threaded application, so each redis pod at most can use one core. A single redis pod does not scale with number of cores on the host node, or the number of host nodes.
         - CPU Speed, RAM available splitting redis DMs to run on separate Pods on a multi-core node or across nodes
 1. Backend-Redis
-    - **Vertical** scaling of each nore (core) redis run on: 
+    - **Vertical** scaling of each node (core) redis run on: 
         - Redis is a single threaded application, so each redis pod at most can use one core. A single redis pod does not scale with number of cores on the host node, or the number of host nodes.
         - CPU Speed, RAM available splitting redis DMs to run on separate Pods on a multi-core node or across nodes
 1. System-memcache
-    - **Vertical** scaling of each nore (core) redis run on: 
+    - **Vertical** scaling of each node (core) redis run on: 
         - Redis is a single threaded application, so each redis pod at most can use one core. A single redis pod does not scale with number of cores on the host node, or the number of host nodes.
         - CPU Speed, RAM available splitting redis DMs to run on separate Pods on a multi-core node or across nodes
 1. System-Sidekiq 
