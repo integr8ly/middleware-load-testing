@@ -1,0 +1,2 @@
+[all:vars]
+temp_dir=/tmp

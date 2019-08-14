@@ -1,0 +1,25 @@
+---
+- name: Process backend resource template
+  template:
+    src: resources.yaml.j2
+    dest: "{{temp_dir}}/resources.yaml"
+
+- name: Check test namespace doesn't already exist
+  shell: oc get project {{backend_test_ns}}
+  register: backend_ns_exists
+  failed_when: backend_ns_exists.stderr != '' and 'NotFound' not in backend_ns_exists.stderr
+
+- name: Create 3scale test namespace
+  shell: oc new-project {{backend_test_ns}}
+  when: backend_ns_exists.rc != 0
+
+- name: Create 3scale test resources
+  shell: oc apply -f {{temp_dir}}/resources.yaml -n {{backend_test_ns}}
+
+- name: Check backend API app route status
+  shell: oc get routes -o=jsonpath='{.items[0].status.ingress[0].conditions[0].status}' -n {{backend_test_ns}}
+  register: backend_route
+  until: backend_route.stdout == "True"
+  retries: 10
+  delay: 10
+  changed_when: False

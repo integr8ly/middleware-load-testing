@@ -1,0 +1,59 @@
+---
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: backend-app
+  labels:
+    app: backend-app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: backend-app
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    spec:
+      containers:
+        - name: backend-app
+          image: docker.io/aidenkeatingrht/backend-app:1.0.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend-app
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: backend-app
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: backend-app
+spec:
+  to:
+    kind: Service
+    name: backend-app
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  wildcardPolicy: None
