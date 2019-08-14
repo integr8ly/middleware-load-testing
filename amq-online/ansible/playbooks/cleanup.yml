@@ -10,4 +10,3 @@
 
   - name: Remove none auth service
     shell: oc delete authenticationservice none-authservice -n {{enmasse_infra_ns}}
-
