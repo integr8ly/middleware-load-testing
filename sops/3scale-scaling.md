@@ -1,9 +1,9 @@
-# 3scale scaling on Openshift 3.11, Integreatly 1.4.x
-This guide states the known limits of 3scale capacity on Openshift along with scaling options for 3scale Components.
+# 3Scale Scaling Guide
+The purpose of this guide is to outline the existing scaling capabilities of 3Scale, including scaling options for high availability and performance driven implementations along with some known limitations within the product.
 
-**Note :** Pod anti-affinity rule is in place across a number of 3scale components. This may result in limited scaling options.
+**Note :** Pod [anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity) rule is in place across a number of 3scale components. This may result in limited scaling options.
 
-## 3scale Scaling Components
+## Component Scaling Options
 **Note :** Components are ordered in priority of known bottle necks.
 
 
@@ -50,7 +50,7 @@ This guide states the known limits of 3scale capacity on Openshift along with sc
     - There should be only one copy of this component running. If it fails, OpenShift will restart a new pod to replace it and it will pick-up where the previous pod ended and process remaining work.
     - No need to scale this service
 
-## 3scale Redis Additional Information
+## Additional Information
 - Redis is used for storage of traffic data, and also for the job queue, hence redis performance can affect the performance of Listeners and Workers.
 
 - Redis is a single threaded application, so each redis pod at most can use one core.
@@ -61,5 +61,5 @@ A single redis pod does not scale with number of cores on the host node, or the 
     - Splitting redis DBs to run on separate Pods on a multi-core node or across nodes.
 
     - Recommend ensuring backend-redis is running on a high-memory, fast core machine that is not heavily loaded by other components
-    
+
 - Redis should be as close as possible in the network to the component(s) using it
