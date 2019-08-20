@@ -11,7 +11,9 @@ The purpose of this guide is to outline the existing scaling capabilities of 3Sc
 #### Scalability:
 - Pod **anti-affinity** rule is important here
 - You can scale this component **horizontally** by adding more PODs
-    - `oc scale dc backend-listener -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
+```
+oc scale dc backend-listener -n <ns-prefix>-3scale --replicas=<number-of-replicas>
+```
 
 #### Depends on:
 - backend-redis
@@ -22,7 +24,9 @@ The purpose of this guide is to outline the existing scaling capabilities of 3Sc
 - Critical functionality -- rate limits depend on this component
 - Depending on the number of reports you should check the lenght of the redis queues for jobs
 - Can be scaled **horizontally** by adding more PODs as needed.
-    - `oc scale dc backend-worker -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
+```
+oc scale dc backend-worker -n <ns-prefix>-3scale --replicas=<number-of-replicas>
+```
 - *Recommended HA --* Deploy a minimum of 2 PODs
 - Configuration Options:
     - You can direct worker PODs to the Redis pod they should use by changing the value for the environment variable `CONFIG_QUEUES_MASTER_NAME` (defaults to “backend-redis:6379/1”). This allows you to have separate Redis PODs for background jobs and for listener data in order to scale them independently.
@@ -34,7 +38,9 @@ The purpose of this guide is to outline the existing scaling capabilities of 3Sc
 ### System-App
 #### Scalability:
 - This component scales **horizontally** by adding more PODs
-    - `oc scale dc system-app -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
+```
+oc scale dc system-app -n <ns-prefix>-3scale --replicas=<number-of-replicas>
+```
 
 ### Apicast-Staging & Apicast-Production
 #### Scalability:
@@ -53,7 +59,9 @@ Redis if OAuth2 authentication is used. By default it is configured to use syste
 ### System-Provider & System-Developer
 #### Scalability:
 - This component scales **horizontally** by adding more PODs
-    - `oc scale dc system-<provider or developer> -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
+```
+oc scale dc system-<provider or developer> -n <ns-prefix>-3scale --replicas=<number-of-replicas>
+```
 - **Note :** As it depends on system-mysql, keep an eye open for common mysql problems.
 - *Recommended HA --* Deploy 2 PODs
 
@@ -85,7 +93,9 @@ Redis if OAuth2 authentication is used. By default it is configured to use syste
 ### System-Sidekiq 
 #### Scalability:
 - Due to the nature of the background jobs they don't usually require to be scaled, one POD should be enough, but both components can be scaled **horizonatally**.
-    - `oc scale dc system-sidekiq -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
+```
+oc scale dc system-sidekiq -n <ns-prefix>-3scale --replicas=<number-of-replicas>   
+ ```
 - These is also `RAILS_MAX_THREADS` which allows for **vertical** scaling, but is recommended to scale horizontally over this approach.
 - *Recommended HA --* Deploy 2 PODs
 
