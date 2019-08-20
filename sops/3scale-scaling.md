@@ -46,7 +46,9 @@ oc scale dc system-app -n <ns-prefix>-3scale --replicas=<number-of-replicas>
 #### Scalability:
 - Pod **anti-affinity** rule is important here
 - You can scale this component **horizontally** by adding more PODs
-    - `oc scale dc apicast-<staging or production> -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
+```
+oc scale dc apicast-<staging or production> -n <ns-prefix>-3scale --replicas=<number-of-replicas>
+```
 - You can scale this component **vertically** by deploying one worker for each CPU core available to the apicast process. This is controlled by the variable `APICAST_WORKERS`
 - *Recommended HA --* Deploy a minimum of 2 PODs in different openshift nodes.
 
