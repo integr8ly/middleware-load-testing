@@ -13,7 +13,7 @@ The purpose of this guide is to outline the existing scaling capabilities of 3Sc
 - You can scale this component **horizontally** by adding more PODs
     - `oc scale dc backend-listener -n <ns-prefix>-3scale --replicas=<number-of-replicas>`
 
-####Depends on:
+#### Depends on:
 - backend-redis
 
 ### Backend-Worker
@@ -28,7 +28,7 @@ The purpose of this guide is to outline the existing scaling capabilities of 3Sc
     - You can direct worker PODs to the Redis pod they should use by changing the value for the environment variable `CONFIG_QUEUES_MASTER_NAME` (defaults to “backend-redis:6379/1”). This allows you to have separate Redis PODs for background jobs and for listener data in order to scale them independently.
     - **Note** that if you change the CONFIG_QUEUES_MASTER_NAME variable, the PODs for backend-listener and backend-cron should also have matching variables.
 
-####Depends on:
+#### Depends on:
 - backend-redis
 
 ### System-App
@@ -94,7 +94,7 @@ Redis if OAuth2 authentication is used. By default it is configured to use syste
 - There should be only one copy of this component running. If it fails, OpenShift will restart a new pod to replace it and it will pick-up where the previous pod ended and process remaining work.
 - No need to scale this service
 
-####Depends on:
+#### Depends on:
 - backend-redis
 
 
