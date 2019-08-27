@@ -1,0 +1,12 @@
+---
+- hosts: intly_master
+  gather_facts: no
+  tasks:
+  - include_role:
+      name: integreatly-enmasse-authservice
+
+  - include_role:
+      name: integreatly-enmasse-addressspace
+
+  - include_role:
+      name: integreatly-enmasse-address

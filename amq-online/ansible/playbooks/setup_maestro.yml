@@ -1,25 +1,9 @@
----
-- hosts: localhost
-  gather_facts: no
-  tasks:
-  - include_role:
-      name: integreatly-enmasse-authservice
-
-  - include_role:
-      name: integreatly-enmasse-addressspace
-
-  - include_role:
-      name: integreatly-enmasse-address
-
-- hosts: master
+- hosts: maestro_master
   gather_facts: no
   tasks:
   - include_role:
       name: config
 
-- hosts: localhost
-  gather_facts: no
-  tasks:
   - import_role:
       name: label-nodes
 
@@ -35,11 +19,11 @@
   - include_role:
       name: maestro-broker
 
-  - include_role:
-      name: maestro-reports
+#   - include_role:
+#       name: maestro-reports
 
-  # - include_role:
-  #     name: maestro-reports-db
+  - include_role:
+      name: maestro-reports-db
 
   - include_role:
       name: maestro-worker

@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{item.name}}
 data: 
+  name: {{item.name}}
   sendReceiveUrl: {{item.sendReceiveUrl}}
   messageSize: "{{item.messageSize}}"
   testDuration: "{{item.testDuration}}"

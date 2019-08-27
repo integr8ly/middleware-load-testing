@@ -1,0 +1,14 @@
+ariaDB [(none)]> CREATE USER 'maestro'@'localhost' IDENTIFIED BY 'maestro-dev';
+Query OK, 0 rows affected (0.00 sec)
+ 
+sh-4.2$ mysql -u root
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON maestro.* TO 'maestro'@'localhost' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.00 sec)
+ 
+MariaDB [(none)]> CREATE USER 'maestro'@'%' IDENTIFIED BY 'maestro-dev';
+Query OK, 0 rows affected (0.00 sec)
+ 
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON maestro.* TO 'maestro'@'%' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.00 sec)
+ 
+MariaDB [(none)]>
