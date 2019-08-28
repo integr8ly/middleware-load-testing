@@ -32,7 +32,10 @@ spec:
         - name: SUT_VERSION
           value: v1.4.1
         - name: SUT_TAGS
-          value: integreatly
+          valueFrom:
+            configMapKeyRef:
+              name: {{item.name}}
+              key: parallelCon
         - name: TEST_TAGS
           value: integreatly-test
         - name: LAB_NAME
