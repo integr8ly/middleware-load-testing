@@ -89,7 +89,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: {{ item.name }}
-              key: parallelCount
+              key: parallelCon
               optional: true
         - name: DISTRIBUTION_STRATEGY
           valueFrom:
