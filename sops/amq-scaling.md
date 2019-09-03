@@ -10,13 +10,13 @@ The basic AMQ Online infrastructure consists of the following components:
  - Console
  - (optional) auth-service.
 
- There is no scaling options for the above components. It is rare that these components will be under load. The following components make up the messaging infrastructure which will be exposed to load under use:
+ There is no scaling options for the above components.
 - Controller
 - Console
 - Brokers
 - Routers
 
-While these components do not scale in the traditional sense. Those components that do scale are the `Routers` and `Brokers` as they experience the most load during use. Typically scaled horizontally and will scale automatically.
+While these components above do not scale in the traditional sense. Those components that do scale are the `Routers` and `Brokers` as they experience the most load during use. Typically scaled horizontally and will scale automatically.
 
 ### AMQ Online Resource Provisioning
 To understand how these components scale we need to first understand how resources are provisioned for AMQ 
