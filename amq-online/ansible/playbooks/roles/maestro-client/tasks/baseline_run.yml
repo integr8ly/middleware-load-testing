@@ -12,8 +12,14 @@
 - include: execute_baseline_tests.yml pkgName="{{item}}"
   with_items: "{{ basline_test_configs }}"
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: scale_workers.yml
 
-# - include: execute_baseline_tests.yml pkgName="{{item}}"
-#   with_items: "{{ basline_test_configs }}"
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
+
+- include: scale_workers.yml
+
+- include: execute_baseline_tests.yml pkgName="{{item}}"
+  with_items: "{{ basline_test_configs }}"
+
+- include: scale_workers.yml
