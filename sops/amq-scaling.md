@@ -16,10 +16,10 @@ The basic AMQ Online infrastructure consists of the following components:
 - Brokers
 - Routers
 
-While these components above do not scale in the traditional sense. Those components that do scale are the `Routers` and `Brokers` as they experience the most load during use. Typically scaled horizontally and will scale automatically.
+While these components above do not scale in the traditional sense. Those components that do scale are the `Routers` and `Brokers` as they experience the most load during use. These are typically scaled horizontally and will scale automatically to meet the demand of the resources provisioned.
 
 ### AMQ Online Resource Provisioning
-To understand how these components scale we need to first understand how resources are provisioned for AMQ 
+To understand how these components scale we need to first understand how resources are provisioned for AMQ. 
 
 When customers want to create addresses they request the necessary infrastructure by creating an address space. An address space provides them with an environment for their addresses. Messaging infrastructure is created specifically for that address space. Note that the customer requests result in new pods being deployed in the (central) infrastructure namespace, not in the project in which the custom resource has been created.
 
