@@ -14,6 +14,7 @@ The purpose of this guide is to outline the existing scaling capabilities of 3Sc
 ```
 oc scale dc backend-listener -n <ns-prefix>-3scale --replicas=<number-of-replicas>
 ```
+- *Recommended HA --* Deploy a minimum of 2 PODs, but for best performance on OSD/POC clusters deploy a minimum of 5 PODS.
 
 #### Depends on:
 - backend-redis
