@@ -23,7 +23,7 @@ oc scale dc backend-listener -n <ns-prefix>-3scale --replicas=<number-of-replica
 #### Scalability:
 - Pod **anti-affinity** rule is important here
 - Critical functionality -- rate limits depend on this component
-- Depending on the number of reports you should check the lenght of the redis queues for jobs
+- Depending on the number of reports you should check the length of the redis queues for jobs
 - Can be scaled **horizontally** by adding more PODs as needed.
 ```
 oc scale dc backend-worker -n <ns-prefix>-3scale --replicas=<number-of-replicas>

@@ -9,7 +9,10 @@ The purpose of this guide is to outline the existing scaling capabilities of SSO
 - Response time is expensive due to password hashing
 - User sessions are kept in memory
 - Heavy reliance on caching 
-- Manual Scaling is possible : 
+
+#### Scalability
+- The default deployment of 1 pod allows a maximum rate of 7 users to login/logout per second. Scaling to 2 pods increases this number to 14 users per second. Adding further pods gives a minimal performance increase
+- This component scales **horizontally** by adding more pods:
 ```
 oc scale dc sso -n <ns-prefix>-sso --replicas=<number-of-replicas>
 ```
@@ -18,4 +21,5 @@ oc scale dc sso -n <ns-prefix>-sso --replicas=<number-of-replicas>
 - There is no auto-scaling support
 - There are no metrics provided for scaling
 - User sessions are kept in memory
-- Heavy reliance on caching 
+- Heavy reliance on caching
+- No performance issues were encountered during load testing
