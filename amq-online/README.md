@@ -34,10 +34,8 @@ Test results can be found at `reports-your-subdomain.com`
 ### Creating addresses
 To meet the description use cases outlined above a number of addresses need to be created.
 
-First, we need remove the standard authservice and to create a none authentication service.
-```
-oc project redhat-rhmi-amq-online
-```
+Login to the cluster using ` oc login ` command
+
 Now we will create our address spaces and addresses in a different project
 ```
 oc new-project maestro-test-addresses
