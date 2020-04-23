@@ -6,5 +6,5 @@ spec:
   type: standard
   plan: standard-unlimited 
   autenticationService:
-    type: none-authservice
+    name: none-authservice
 
