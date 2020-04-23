@@ -36,9 +36,7 @@ To meet the description use cases outlined above a number of addresses need to b
 
 First, we need remove the standard authservice and to create a none authentication service.
 ```
-oc project openshift-enmasse
-oc delete authenticationservice standard-authservice
-oc create -f enmasse/authservice/none-authservice.yaml
+oc project redhat-rhmi-amq-online
 ```
 Now we will create our address spaces and addresses in a different project
 ```
@@ -155,7 +153,7 @@ Each test case is run by creating a configmap with the parameters for the test, 
 
 To run a test first you must update `testcase-1.yaml` to match your Receive Url
 ```
-oc apply -f maestro/oc/client/testcase-1.yaml
+oc apply -f maestro/oc/client/testcases/testcase-1.yaml
 oc apply -f maestro/oc/client/client.yaml
 ```
 The test is finished once the job is marked as complete. If the test fails it will be rerun. You can view the progress in the client pod's logs. 
