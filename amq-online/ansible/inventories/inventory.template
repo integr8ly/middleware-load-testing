@@ -1,8 +1,14 @@
 [all:vars]
 temp_dir=/tmp
 
-[master:vars]
+[intly_master:vars]
 ansible_user=root
 
-[master]
-master.evals.example.com
+[maestro_master:vars]
+ansible_user=root
+
+[intly_master]
+intly_master.evals.example.com
+
+[maestro_master]
+maestro_master.evals.example.com

@@ -1,0 +1,22 @@
+---
+- name: Scale workers back to flush memory
+  shell: oc scale deployment maestro-worker -n maestro --replicas=0
+
+- name: Ensure workers have scaled back
+  shell: oc get deployment maestro-worker -n maestro -o jsonpath='{.spec.replicas}'
+  register: replica_count
+  until: replica_count.stdout == "0"
+  retries: 20
+  delay: 10
+  changed_when: False
+
+- name: Restore workers replica count
+  shell: oc scale deployment maestro-worker -n maestro --replicas=2
+
+- name: Ensure workers have scaled up
+  shell: oc get deployment maestro-worker -n maestro -o jsonpath='{..status.availableReplicas}'
+  register: replica_count
+  until: replica_count.stdout == "2"
+  retries: 20
+  delay: 10
+  changed_when: False

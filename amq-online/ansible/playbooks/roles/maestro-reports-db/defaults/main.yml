@@ -1,6 +1,6 @@
 ---
 mysql_user: "maestro"
-mysql_password: "maestroReports"
+mysql_password: "maestro-dev"
 mysql_db: "maestro"
 maria_image: "centos/mariadb-101-centos7"
 maria_name: "mariadb-101-centos7"

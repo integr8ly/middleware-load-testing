@@ -1,5 +1,17 @@
 ---
-- hosts: localhost
+- hosts: intly_master
+  gather_facts: no
+  tasks:
+  - name: Fetch addressspace standard infra uidd
+    shell:  oc get addressspace standard -o jsonpath='{.status.endpointStatuses[0].externalHost}' -n {{test_ns}}
+    register: standard_addressspace
+    changed_when: False
+  - name: Get standard address space uidd
+    add_host:
+      name: AMQ_CONFIG
+      standard_uidd: "{{standard_addressspace.stdout}}"
+    
+- hosts: maestro_master
   gather_facts: no
   tasks:
   - include_role:
